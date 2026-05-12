@@ -1,25 +1,27 @@
 import { useAuth } from '@/context/AuthContext';
-import { Button } from '@/components/ui/button';
-import { LogOut, User } from 'lucide-react';
+import { LogOut, User, Bell } from 'lucide-react';
 
 export default function Header() {
   const { user, logout } = useAuth();
 
   return (
-    <header className="bg-white border-b px-6 py-4 flex items-center justify-between">
+    <header className="bg-white border-b border-slate-100 px-6 py-4 flex items-center justify-between shadow-sm">
       <div>
-        <p className="text-sm text-slate-500">Welcome back,</p>
-        <p className="font-semibold text-slate-800">{user?.name}</p>
+        <p className="text-sm text-slate-400">Welcome back,</p>
+        <p className="font-bold text-slate-800 text-lg">{user?.name} 👋</p>
       </div>
       <div className="flex items-center gap-3">
-        <div className="flex items-center gap-2 text-sm text-slate-600">
-          <User size={16} />
+        <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-50 text-sm text-slate-500">
+          <User size={14} />
           {user?.email}
         </div>
-        <Button variant="outline" size="sm" onClick={logout}>
-          <LogOut size={16} className="mr-2" />
+        <button
+          onClick={logout}
+          className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-white transition-all hover:scale-105"
+          style={{ background: 'linear-gradient(135deg, #064e3b, #059669)' }}>
+          <LogOut size={14} />
           Logout
-        </Button>
+        </button>
       </div>
     </header>
   );
