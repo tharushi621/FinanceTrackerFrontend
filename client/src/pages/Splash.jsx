@@ -1,208 +1,174 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { TrendingUp, Shield, Target, BarChart2, ArrowRight, Sparkles } from 'lucide-react';
+import heroGirl from '@/assets/herogirl.jpg';
 
-const motivations = [
-  { text: "A penny saved is a penny earned.", author: "Benjamin Franklin" },
-  { text: "Do not save what is left after spending, but spend what is left after saving.", author: "Warren Buffett" },
-  { text: "Financial freedom is available to those who learn about it and work for it.", author: "Robert Kiyosaki" },
-  { text: "It's not about how much money you make, but how much you keep.", author: "Robert Kiyosaki" },
-  { text: "The secret to wealth is simple: spend less than you earn.", author: "Thomas Stanley" },
-];
-
-const features = [
-  { icon: '📊', title: 'Smart Analytics', desc: 'Visualize your spending patterns' },
-  { icon: '🎯', title: 'Budget Goals', desc: 'Set and track monthly budgets' },
-  { icon: '💸', title: 'Expense Tracking', desc: 'Log every transaction easily' },
-  { icon: '🔒', title: 'Secure & Private', desc: 'Your data stays protected' },
+const stats = [
+  { value: '10K+', label: 'Active Users' },
+  { value: '$2M+', label: 'Money Tracked' },
+  { value: '4.9★', label: 'User Rating' },
 ];
 
 export default function Splash() {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
-  const [quoteIndex, setQuoteIndex] = useState(0);
-  const [quoteVisible, setQuoteVisible] = useState(true);
-  const [currentFeature, setCurrentFeature] = useState(0);
 
   useEffect(() => {
-    setTimeout(() => setShow(true), 100);
-
-    const quoteTimer = setInterval(() => {
-      setQuoteVisible(false);
-      setTimeout(() => {
-        setQuoteIndex((i) => (i + 1) % motivations.length);
-        setQuoteVisible(true);
-      }, 500);
-    }, 4000);
-
-    const featureTimer = setInterval(() => {
-      setCurrentFeature((i) => (i + 1) % features.length);
-    }, 2000);
-
-    return () => {
-      clearInterval(quoteTimer);
-      clearInterval(featureTimer);
-    };
+    setTimeout(() => setShow(true), 80);
   }, []);
 
   return (
-    <div className="min-h-screen flex overflow-hidden"
-      style={{ background: 'linear-gradient(135deg, #022c22 0%, #064e3b 40%, #065f46 70%, #047857 100%)' }}>
-
-      {/* Animated background */}
-      {[...Array(6)].map((_, i) => (
-        <div key={i}
-          className="absolute rounded-full opacity-5 animate-pulse"
-          style={{
-            width: `${200 + i * 100}px`,
-            height: `${200 + i * 100}px`,
-            top: `${-50 + i * 15}%`,
-            left: `${-10 + i * 20}%`,
-            background: 'radial-gradient(circle, #34d399, transparent)',
-            animationDelay: `${i * 0.5}s`,
-            animationDuration: `${3 + i}s`,
-          }} />
-      ))}
-
-      {/* Left side */}
-      <div className={`flex-1 flex flex-col justify-center px-16 transition-all duration-1000 ${show ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
-
-        {/* Logo */}
-        <div className="flex items-center gap-4 mb-10">
-          <div className="w-16 h-16 rounded-2xl flex items-center justify-center shadow-2xl"
-            style={{ background: 'linear-gradient(135deg, #34d399, #059669)' }}>
-            <span className="text-3xl">💰</span>
-          </div>
-          <div>
-            <h1 className="text-3xl font-black text-white tracking-tight">
-              Finance<span style={{ color: '#34d399' }}>Tracker</span>
-            </h1>
-            <p className="text-xs tracking-widest uppercase" style={{ color: '#6ee7b7' }}>Smart Money Management</p>
-          </div>
-        </div>
-
-        {/* Headline */}
-        <h2 className="text-6xl font-black text-white leading-tight mb-4">
-          Take Control<br />
-          of Your<br />
-          <span style={{
-            background: 'linear-gradient(135deg, #34d399, #6ee7b7)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent'
-          }}>
-            Financial Future
-          </span>
-        </h2>
-
-        <p className="text-lg text-white/60 mb-10 max-w-md leading-relaxed">
-          Track expenses, set smart budgets, and watch your savings grow. 
-          Join thousands building their dream financial life.
-        </p>
-
-        {/* Buttons */}
-        <div className="flex gap-4 mb-12">
-          <button
-            onClick={() => navigate('/register')}
-            className="px-8 py-4 rounded-2xl font-bold text-white shadow-2xl transition-all duration-200 hover:scale-105 hover:shadow-green-500/25"
-            style={{ background: 'linear-gradient(135deg, #059669, #34d399)' }}>
-            Start For Free 🚀
-          </button>
-          <button
-            onClick={() => navigate('/login')}
-            className="px-8 py-4 rounded-2xl font-bold transition-all duration-200 hover:scale-105"
-            style={{
-              background: 'rgba(255,255,255,0.08)',
-              border: '1px solid rgba(255,255,255,0.2)',
-              color: 'white',
-              backdropFilter: 'blur(10px)'
-            }}>
-            Sign In →
-          </button>
-        </div>
-
-        {/* Stats */}
-        <div className="flex gap-8">
-          {[
-            { value: '10K+', label: 'Active Users' },
-            { value: '$2M+', label: 'Money Tracked' },
-            { value: '4.9★', label: 'User Rating' },
-          ].map((s) => (
-            <div key={s.label}>
-              <p className="text-2xl font-black text-white">{s.value}</p>
-              <p className="text-xs text-white/40 uppercase tracking-wider">{s.label}</p>
-            </div>
-          ))}
-        </div>
+    <div
+      className="min-h-screen flex flex-col overflow-hidden"
+      style={{ background: 'linear-gradient(160deg, #021a12 0%, #042f1e 40%, #064e3b 100%)' }}
+    >
+      {/* Ambient glows */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute rounded-full opacity-[0.07]"
+          style={{ width: 700, height: 700, background: 'radial-gradient(circle, #34d399, transparent)', top: -200, right: -100 }} />
+        <div className="absolute rounded-full opacity-[0.05]"
+          style={{ width: 500, height: 500, background: 'radial-gradient(circle, #6ee7b7, transparent)', bottom: -100, left: '20%' }} />
       </div>
 
-      {/* Right side */}
-      <div className={`flex-1 flex flex-col justify-center px-12 transition-all duration-1000 delay-300 ${show ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
-
-        {/* Motivational quote card */}
-        <div className="rounded-3xl p-8 mb-6 shadow-2xl"
-          style={{
-            background: 'rgba(255,255,255,0.07)',
-            backdropFilter: 'blur(20px)',
-            border: '1px solid rgba(255,255,255,0.1)'
-          }}>
-          <div className="text-4xl mb-4">💡</div>
-          <div className={`transition-all duration-500 ${quoteVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
-            <p className="text-white text-xl font-medium leading-relaxed mb-3 italic">
-              "{motivations[quoteIndex].text}"
-            </p>
-            <p style={{ color: '#34d399' }} className="text-sm font-semibold">
-              — {motivations[quoteIndex].author}
-            </p>
+      {/* ── NAVBAR (brand + auth only) ── */}
+      <nav className={`relative z-20 flex items-center justify-between px-12 py-5 transition-all duration-700 ${show ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}>
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-xl flex items-center justify-center"
+            style={{ background: 'linear-gradient(135deg, #059669, #34d399)' }}>
+            <TrendingUp size={17} color="#fff" strokeWidth={2.5} />
           </div>
-          {/* Quote dots */}
-          <div className="flex gap-2 mt-4">
-            {motivations.map((_, i) => (
-              <div key={i} className="h-1.5 rounded-full transition-all duration-300"
-                style={{
-                  width: i === quoteIndex ? '24px' : '6px',
-                  background: i === quoteIndex ? '#34d399' : 'rgba(255,255,255,0.2)'
-                }} />
+          <span className="text-white font-black text-lg tracking-tight">
+            Finance<span style={{ color: '#34d399' }}>Tracker</span>
+          </span>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <button onClick={() => navigate('/login')}
+            className="px-5 py-2 rounded-lg text-sm font-semibold text-white/60 hover:text-white transition-colors duration-200">
+            Sign In
+          </button>
+          <button onClick={() => navigate('/register')}
+            className="flex items-center gap-1.5 px-5 py-2 rounded-lg text-sm font-bold text-white transition-all duration-200 hover:scale-105 hover:brightness-110"
+            style={{ background: 'linear-gradient(135deg, #059669, #34d399)' }}>
+            Get Started <ArrowRight size={14} />
+          </button>
+        </div>
+      </nav>
+
+      {/* ── HERO ── */}
+      <div className="relative z-10 flex flex-1 items-center px-12 pb-8 gap-6">
+
+        {/* LEFT */}
+        <div className={`flex flex-col w-[46%] transition-all duration-1000 delay-150 ${show ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
+
+          {/* Badge */}
+          <div className="flex items-center gap-2 mb-7 w-fit px-3 py-1.5 rounded-full"
+            style={{ background: 'rgba(52,211,153,0.1)', border: '1px solid rgba(52,211,153,0.25)' }}>
+            <Sparkles size={12} style={{ color: '#34d399' }} />
+            <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: '#6ee7b7' }}>
+              Your Financial Journey Starts Here
+            </span>
+          </div>
+
+          {/* Headline */}
+          <h2 className="text-[3.6rem] font-black text-white leading-[1.05] mb-5 tracking-tight">
+            Take Control<br />of Your<br />
+            <span style={{
+              background: 'linear-gradient(90deg, #34d399, #6ee7b7)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}>
+              Financial Future
+            </span>
+          </h2>
+
+          {/* Subtext */}
+          <p className="text-base text-white/45 leading-relaxed mb-9 max-w-[340px]">
+            Track expenses, set smart budgets, and build the life you deserve — simple, powerful, and secure.
+          </p>
+
+          {/* CTAs */}
+          <div className="flex items-center gap-4 mb-11">
+            <button onClick={() => navigate('/register')}
+              className="flex items-center gap-2 px-7 py-3.5 rounded-xl font-bold text-sm text-white transition-all duration-200 hover:scale-105"
+              style={{ background: 'linear-gradient(135deg, #059669, #34d399)', boxShadow: '0 8px 32px rgba(5,150,105,0.35)' }}>
+              Get Started Free <ArrowRight size={15} />
+            </button>
+            <button onClick={() => navigate('/login')}
+              className="px-7 py-3.5 rounded-xl font-bold text-sm text-white/70 hover:text-white transition-all duration-200 hover:scale-105"
+              style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)' }}>
+              Sign In
+            </button>
+          </div>
+
+          {/* Stats */}
+          <div className="flex items-center gap-8">
+            {stats.map((s, i) => (
+              <div key={s.label} className="flex items-center gap-8">
+                {i > 0 && <div className="w-px h-8 bg-white/10" />}
+                <div>
+                  <p className="text-2xl font-black text-white">{s.value}</p>
+                  <p className="text-[10px] font-semibold text-white/30 uppercase tracking-widest mt-0.5">{s.label}</p>
+                </div>
+              </div>
             ))}
           </div>
         </div>
 
-        {/* Feature cards */}
-        <div className="grid grid-cols-2 gap-4 mb-6">
-          {features.map((f, i) => (
-            <div key={i}
-              className="rounded-2xl p-5 transition-all duration-500"
-              style={{
-                background: i === currentFeature
-                  ? 'linear-gradient(135deg, rgba(52,211,153,0.2), rgba(5,150,105,0.2))'
-                  : 'rgba(255,255,255,0.05)',
-                border: i === currentFeature
-                  ? '1px solid rgba(52,211,153,0.4)'
-                  : '1px solid rgba(255,255,255,0.08)',
-                transform: i === currentFeature ? 'scale(1.03)' : 'scale(1)',
-              }}>
-              <div className="text-2xl mb-2">{f.icon}</div>
-              <p className="text-white font-semibold text-sm">{f.title}</p>
-              <p className="text-white/50 text-xs mt-1">{f.desc}</p>
-            </div>
-          ))}
-        </div>
+        {/* RIGHT */}
+        <div className={`flex-1 relative flex items-center justify-center transition-all duration-1000 delay-300 ${show ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
 
-        {/* Mock dashboard preview */}
-        <div className="rounded-2xl p-5"
-          style={{
-            background: 'rgba(255,255,255,0.05)',
-            border: '1px solid rgba(255,255,255,0.08)'
-          }}>
-          <p className="text-white/40 text-xs uppercase tracking-wider mb-3">Your Money At a Glance</p>
-          <div className="flex gap-3">
+          {/* Glow behind image */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div className="w-[380px] h-[380px] rounded-full opacity-15"
+              style={{ background: 'radial-gradient(circle, #34d399, transparent)' }} />
+          </div>
+
+          <div className="relative w-full max-w-[500px]">
+            {/* Corner accents */}
+            <div className="absolute -top-4 -left-4 w-10 h-10 opacity-50"
+              style={{ borderTop: '2px solid #34d399', borderLeft: '2px solid #34d399', borderRadius: '4px 0 0 0' }} />
+            <div className="absolute -bottom-4 -right-4 w-10 h-10 opacity-50"
+              style={{ borderBottom: '2px solid #34d399', borderRight: '2px solid #34d399', borderRadius: '0 0 4px 0' }} />
+
+            {/* Photo */}
+            <div className="relative rounded-[2rem] overflow-hidden"
+              style={{ border: '1px solid rgba(52,211,153,0.18)', boxShadow: '0 30px 80px rgba(0,0,0,0.55), 0 0 60px rgba(52,211,153,0.08)' }}>
+              <img
+                src={heroGirl}
+                alt="Smart finance management"
+                className="w-full object-cover"
+                style={{ height: '490px', objectPosition: 'center top' }}
+              />
+              <div className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none"
+                style={{ background: 'linear-gradient(to top, rgba(4,47,30,0.7), transparent)' }} />
+            </div>
+
+            {/* Dot grid */}
+            <div className="absolute -bottom-5 -right-5 grid grid-cols-4 gap-1.5 opacity-25">
+              {[...Array(16)].map((_, i) => (
+                <div key={i} className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              ))}
+            </div>
+
+            {/* Floating feature cards */}
             {[
-              { label: 'Balance', value: '$12,450', color: '#34d399' },
-              { label: 'Saved', value: '$3,200', color: '#60a5fa' },
-              { label: 'Spent', value: '$1,800', color: '#f87171' },
-            ].map((item) => (
-              <div key={item.label} className="flex-1 rounded-xl p-3"
-                style={{ background: 'rgba(255,255,255,0.05)' }}>
-                <p className="text-xs text-white/40 mb-1">{item.label}</p>
-                <p className="font-bold text-sm" style={{ color: item.color }}>{item.value}</p>
+              { pos: '-left-16 top-8',    icon: BarChart2,   title: 'Smart Analytics',  desc: 'Real-time insights'   },
+              { pos: '-right-16 top-8',   icon: Target,      title: 'Budget Goals',      desc: 'Hit every target'     },
+              { pos: '-left-16 bottom-12',icon: TrendingUp,  title: 'Expense Tracking',  desc: 'Know where it goes'   },
+              { pos: '-right-16 bottom-12',icon: Shield,     title: 'Secure & Private',  desc: 'Bank-grade security'  },
+            ].map(({ pos, icon: Icon, title, desc }) => (
+              <div key={title}
+                className={`absolute ${pos} px-3.5 py-2.5 rounded-xl flex items-center gap-2.5 backdrop-blur-md`}
+                style={{ background: 'rgba(6,79,60,0.88)', border: '1px solid rgba(52,211,153,0.2)', boxShadow: '0 8px 24px rgba(0,0,0,0.3)' }}>
+                <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
+                  style={{ background: 'rgba(52,211,153,0.2)' }}>
+                  <Icon size={14} style={{ color: '#34d399' }} />
+                </div>
+                <div>
+                  <p className="text-white text-xs font-bold leading-none">{title}</p>
+                  <p className="text-white/40 text-[10px] mt-0.5">{desc}</p>
+                </div>
               </div>
             ))}
           </div>
